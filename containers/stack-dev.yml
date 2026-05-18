@@ -1,0 +1,39 @@
+
+services:
+  # NEO4J ---------------------------------------------------
+  neo4j:
+    image: neo4j:5.26
+    container_name: neo4j
+    ports:
+      - "${NEO4J_ENGINE_PORT}:7687"
+      - "${NEO4J_BROWSER_PORT}:7474"
+    environment:
+    # Recommended: to avoid problems, password should only contain ASCII characters. 
+    # This problem only occurs in the docker version 5.13 of Neo4j, not on Desktop local version. 
+    # Version neo4j:5.26 apparently solves the issue and works with more characters
+    # Must be some problem with encoding
+      - NEO4J_AUTH=neo4j/12345678 # Should NOT be wrapped in quotation marks
+    # volumes:
+      # - ./neo4j/config:/config
+      # - ./neo4j/data:/data
+      # - ./neo4j/logs:/logs
+      # - ./neo4j/import:/import
+      # - ./neo4j/plugins:/plugins
+    restart: unless-stopped
+
+  # MEMGRAPH ---------------------------------------------------
+  memgraph-engine:
+    image: memgraph/memgraph-mage
+    ports:
+      - "${MEMGRAPH_ENGINE_PORT_1}:7687"
+      - "${MEMGRAPH_ENGINE_PORT_2}:7444"
+    restart: unless-stopped
+
+  memgraph-lab:
+    image: memgraph/lab
+    ports:
+      - "${MEMGRAPH_LAB_PORT}:3000"
+    environment:
+      - QUICK_CONNECT_MG_HOST=memgraph-engine
+      - QUICK_CONNECT_MG_PORT=7687
+    restart: unless-stopped

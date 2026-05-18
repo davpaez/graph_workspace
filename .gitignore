@@ -1,0 +1,16 @@
+# pixi environments
+.pixi/*
+!.pixi/config.toml
+
+# Python
+__pycache__
+
+# Jupyter
+.ipynb_checkpoints
+
+# Testing
+.pytest_cache/
+
+# Containers bind mounts
+/containers/*/
+

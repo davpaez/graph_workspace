@@ -1,0 +1,9 @@
+name: python312-jupyterlab
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - jupyterlab
+  - nb_conda_kernels
+  - nodejs
