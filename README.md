@@ -13,6 +13,7 @@ Tools
 - Analysers
 	- NetworkX
 - Visualization
+	- neo4j-viz
 	- pyvis
 	- jaal
 	- orb (JS for browser)
